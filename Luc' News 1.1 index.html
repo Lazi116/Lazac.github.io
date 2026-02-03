@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luca News 💕</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system}
+body{background:#0b0f1a;color:white;overflow-x:hidden}
+
+header{
+background:linear-gradient(135deg,#111,#1e2a4a);
+padding:25px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,.5)
+}
+
+header h1{font-size:2rem;letter-spacing:2px}
+header p{opacity:.8}
+
+.hero{
+padding:40px 20px;
+text-align:center;
+animation:fade 1s ease
+}
+
+.hero h2{font-size:1.8rem;margin-bottom:10px}
+.hero span{color:#ff6bd6}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px
+}
+
+.card{
+background:linear-gradient(145deg,#12182a,#0a0f1f);
+border-radius:22px;
+overflow:hidden;
+box-shadow:0 15px 40px rgba(0,0,0,.6);
+cursor:pointer;
+transition:.35s
+}
+
+.card:hover{
+transform:translateY(-8px) scale(1.03);
+box-shadow:0 0 25px #ff6bd680
+}
+
+.img{
+height:160px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:3rem;
+background:linear-gradient(135deg,#ff6bd6,#6b8bff)
+}
+
+.content{padding:18px}
+.content h3{margin-bottom:6px}
+.content p{opacity:.75;font-size:.9rem}
+
+.tag{
+margin-top:8px;
+display:inline-block;
+padding:5px 12px;
+border-radius:20px;
+background:#ff6bd6;
+color:black;
+font-size:.7rem
+}
+
+#modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.7);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:10
+}
+
+.modalBox{
+background:linear-gradient(145deg,#111,#1a2140);
+padding:25px;
+border-radius:25px;
+width:90%;
+max-width:520px;
+animation:pop .3s ease
+}
+
+.close{float:right;cursor:pointer;font-weight:bold}
+
+.loveBtn{
+margin-top:15px;
+padding:10px 20px;
+border:none;
+border-radius:20px;
+background:#ff6bd6;
+cursor:pointer;
+font-weight:bold
+}
+
+footer{
+text-align:center;
+padding:20px;
+opacity:.6;
+font-size:.8rem
+}
+
+@keyframes pop{
+from{transform:scale(.6);opacity:0}
+to{transform:scale(1);opacity:1}
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1;transform:translateY(0)}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>📰 Luca News</h1>
+<p>A világ legkülönlegesebb hírsztárja 💕</p>
+</header>
+
+<section class="hero">
+<h2>Breaking: <span>Szirom Luca</span> újra lenyűgözte a világot</h2>
+<p>Exkluzív hírek csak a kiválasztottnak 😏</p>
+</section>
+
+<div class="container">
+
+<div class="card" onclick="openNews('Olimpiai bajnok','Szirom Luca megnyerte a „legszebb mosoly” olimpiai számot. A zsűri szerint biológiailag lehetetlen nem beleszeretni.')">
+<div class="img">🥇</div>
+<div class="content">
+<h3>Luca olimpiai bajnok</h3>
+<p>A mosoly, ami történelmet írt.</p>
+<span class="tag">SPORT</span>
+</div>
+</div>
+
+<div class="card" onclick="openNews('Internet királynő','Szirom Luca egyetlen pillantással több szívet lop, mint mások ezer poszttal.')">
+<div class="img">📱</div>
+<div class="content">
+<h3>Luca uralja az internetet</h3>
+<p>Like-ok robbanása világszerte.</p>
+<span class="tag">MEDIA</span>
+</div>
+</div>
+
+<div class="card" onclick="openNews('Titkos koncert','Luca titkos koncertje után a közönség szerint nem a zene, hanem Ő volt a legjobb szám.')">
+<div class="img">🎤</div>
+<div class="content">
+<h3>Titkos koncert</h3>
+<p>Mosoly turné elindult.</p>
+<span class="tag">MUSIC</span>
+</div>
+</div>
+
+<div class="card" onclick="openNews('Világrekord','Szirom Luca tartja a rekordot: legaranyosabb pillantás 2.1 másodperc alatt.')">
+<div class="img">🌍</div>
+<div class="content">
+<h3>Világrekord</h3>
+<p>A tudomány sem érti.</p>
+<span class="tag">SCIENCE</span>
+</div>
+</div>
+
+</div>
+
+<div id="modal">
+<div class="modalBox">
+<span class="close" onclick="closeNews()">X</span>
+<h2 id="mTitle"></h2>
+<p id="mText"></p>
+<button class="loveBtn" onclick="love()">💖 Secret Button</button>
+</div>
+</div>
+
+<footer>
+QR Secret Project by Lázár 😈
+</footer>
+
+<script>
+function openNews(t,x){
+modal.style.display="flex";
+mTitle.innerText=t;
+mText.innerText=x;
+}
+function closeNews(){
+modal.style.display="none";
+}
+function love(){
+alert("Plot twist: te vagy Luca kedvenc híre 💕");
+}
+</script>
+
+</body>
+</html>

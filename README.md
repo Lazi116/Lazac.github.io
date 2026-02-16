@@ -160,11 +160,11 @@ h1{
 <section id="letter">
 <div class="container">
 <h1>Egy kis levél</h1>
-<p class="short fade">Nem nagy szavak.</p>
-<p class="short fade">Csak hogy tudd...</p>
-<p class="short fade">nagyon örülök, hogy vagy nekem.</p>
-<p class="short fade">Minden nap, amióta együtt vagyunk, számít.</p>
-<p class="short fade">Nem tökéletes, de igazi.</p>
+<p class="short fade">Veled minden perc ertelmet nyer,</p>
+<p class="short fade">Minden pillanat veled otthon.</p>
+<p class="short fade">Szeretlek, nem tudnék nélküled élni.</p>
+<p class="short fade">Minden nap, amióta együtt vagyunk, egyre jobban</p>
+<p class="short fade">Ez a kapcsolat nem tökéletes, de igazi.</p>
 </div>
 </section>
 
@@ -172,13 +172,13 @@ h1{
 <div class="container">
 <h1>Mióta együtt</h1>
 <div class="counter" id="together"></div>
-<p class="short">És ez csak megy tovább…</p>
+<p class="short">És ez csak megy tovább és tovább amíg élek sőt még utána is…</p>
 </div>
 </section>
 
 <section id="why">
-<div class="container">
-<h1>Miért szeretlek?</h1>
+<div class="cont8ainer">
+<h1>Miért is szeretlek?(itt van pár ok te kuki)</h1>
 <div class="quote" id="quote"></div>
 <button class="button" onclick="newQuote()">Új ok</button>
 </div>
@@ -195,7 +195,7 @@ setInterval(updateTime,1000);updateTime();
 
 // Miért szeretlek - sok ok
 const quotes=[
-"Mert boldogabb vagyok veled.","Mert megnevettetsz.","Mert hiányzol, ha nem vagy ott.","Mert melletted minden könnyebb.","Mert te te vagy.","Mert mindig figyelsz rám.","Mert veled minden egyszerűbb.","Mert a mosolyod ragyogtat.","Mert inspirálsz.","Mert a hangod megnyugtat.","Mert szeretem, ahogy gondolkodsz.","Mert minden nap jobbá teszed az életem.","Mert tudod, mikor kell hallgatni.","Mert szeretsz apró dolgokat csinálni.","Mert veled minden pillanat különleges." ];
+"Mert boldogabb vagyok veled.","Mert megnevettetsz.","Mert hiányzol, ha nem vagy ott.","Mert melletted minden könnyebb.","Mert te te vagy.","Mert mindig figyelsz rám.","Mert veled minden egyszerűbb.","Mert a mosolyod szebb barki mosolyanal.","Mert inspirálsz.","Mert a hangod megnyugtat.","Mert szeretem, ahogy gondolkodsz.","Mert minden nap jobbá teszed az életem.","Mert tudod, mikor kell hallgatni.","Mert szeretsz apró dolgokat csinálni.","Mert nevetésed fülemnek a leszebb zene","Mert veled minden pillanat különleges." ];
 function newQuote(){document.getElementById('quote').innerText=quotes[Math.floor(Math.random()*quotes.length)];}
 newQuote();
 

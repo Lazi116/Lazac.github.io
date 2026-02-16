@@ -3,203 +3,236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luca News 💕</title>
-
+<title>Luca Universe ✨</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system}
-body{background:#0b0f1a;color:white;overflow-x:hidden}
-
-header{
-background:linear-gradient(135deg,#111,#1e2a4a);
-padding:25px;
-text-align:center;
-box-shadow:0 10px 30px rgba(0,0,0,.5)
+:root{
+  --bg1:#0f172a;
+  --bg2:#1e293b;
+  --accent:#f472b6;
+  --accent2:#38bdf8;
+  --glass:rgba(255,255,255,0.08);
+  --text:#e2e8f0;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Montserrat',sans-serif;
+  background:linear-gradient(135deg,var(--bg1),var(--bg2));
+  color:var(--text);
+  overflow-x:hidden;
 }
 
-header h1{font-size:2rem;letter-spacing:2px}
-header p{opacity:.8}
-
-.hero{
-padding:40px 20px;
-text-align:center;
-animation:fade 1s ease
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  background:rgba(0,0,0,0.4);
+  backdrop-filter:blur(10px);
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  padding:20px;
+  z-index:1000;
+}
+nav a{
+  color:white;
+  text-decoration:none;
+  font-weight:600;
+  transition:0.3s;
+}
+nav a:hover{
+  color:var(--accent);
 }
 
-.hero h2{font-size:1.8rem;margin-bottom:10px}
-.hero span{color:#ff6bd6}
+.section{
+  min-height:100vh;
+  padding:120px 10% 80px 10%;
+  display:none;
+  animation:fade 0.8s ease;
+}
+.section.active{display:block}
 
-.container{
-max-width:1000px;
-margin:auto;
-padding:20px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:25px
+@keyframes fade{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+h1,h2{
+  font-family:'Playfair Display',serif;
+  margin-bottom:20px;
 }
 
 .card{
-background:linear-gradient(145deg,#12182a,#0a0f1f);
-border-radius:22px;
-overflow:hidden;
-box-shadow:0 15px 40px rgba(0,0,0,.6);
-cursor:pointer;
-transition:.35s
+  background:var(--glass);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:25px;
+  padding:40px;
+  margin-bottom:30px;
+  backdrop-filter:blur(15px);
+  transition:0.4s;
 }
-
 .card:hover{
-transform:translateY(-8px) scale(1.03);
-box-shadow:0 0 25px #ff6bd680
+  transform:scale(1.02);
+  box-shadow:0 20px 60px rgba(244,114,182,0.3);
 }
 
-.img{
-height:160px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:3rem;
-background:linear-gradient(135deg,#ff6bd6,#6b8bff)
+button{
+  padding:12px 25px;
+  border:none;
+  border-radius:40px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+button:hover{transform:scale(1.1)}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
 }
 
-.content{padding:18px}
-.content h3{margin-bottom:6px}
-.content p{opacity:.75;font-size:.9rem}
-
-.tag{
-margin-top:8px;
-display:inline-block;
-padding:5px 12px;
-border-radius:20px;
-background:#ff6bd6;
-color:black;
-font-size:.7rem
+.countdown{
+  font-size:1.5rem;
+  margin-top:20px;
 }
 
-#modal{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.7);
-display:none;
-align-items:center;
-justify-content:center;
-z-index:10
+.modal{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.7);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:2000;
+}
+.modal-content{
+  background:#1e293b;
+  padding:50px;
+  border-radius:20px;
+  max-width:500px;
+  text-align:center;
 }
 
-.modalBox{
-background:linear-gradient(145deg,#111,#1a2140);
-padding:25px;
-border-radius:25px;
-width:90%;
-max-width:520px;
-animation:pop .3s ease
-}
-
-.close{float:right;cursor:pointer;font-weight:bold}
-
-.loveBtn{
-margin-top:15px;
-padding:10px 20px;
-border:none;
-border-radius:20px;
-background:#ff6bd6;
-cursor:pointer;
-font-weight:bold
-}
-
-footer{
-text-align:center;
-padding:20px;
-opacity:.6;
-font-size:.8rem
-}
-
-@keyframes pop{
-from{transform:scale(.6);opacity:0}
-to{transform:scale(1);opacity:1}
-}
-
-@keyframes fade{
-from{opacity:0;transform:translateY(20px)}
-to{opacity:1;transform:translateY(0)}
+canvas{
+  position:fixed;
+  top:0;left:0;
+  z-index:-1;
 }
 </style>
 </head>
-
 <body>
 
-<header>
-<h1>📰 Luca News</h1>
-<p>A világ legkülönlegesebb hírsztárja 💕</p>
-</header>
+<canvas id="stars"></canvas>
 
-<section class="hero">
-<h2>Breaking: <span>Szirom Luca</span> újra lenyűgözte a világot</h2>
-<p>Exkluzív hírek csak a kiválasztottnak 😏</p>
-</section>
+<nav>
+  <a onclick="showSection('home')">Főoldal</a>
+  <a onclick="showSection('story')">Történet</a>
+  <a onclick="showSection('countdown')">Visszaszámláló</a>
+  <a onclick="showSection('gallery')">Galéria</a>
+  <a onclick="showSection('secret')">Titok</a>
+</nav>
 
-<div class="container">
-
-<div class="card" onclick="openNews('Olimpiai bajnok','Szirom Luca megnyerte a „legszebb mosoly” olimpiai számot. A zsűri szerint biológiailag lehetetlen nem beleszeretni.')">
-<div class="img">🥇</div>
-<div class="content">
-<h3>Luca olimpiai bajnok</h3>
-<p>A mosoly, ami történelmet írt.</p>
-<span class="tag">SPORT</span>
-</div>
+<div id="home" class="section active">
+  <h1>Luca Universe</h1>
+  <div class="card">
+    Ez nem csak egy oldal. Ez egy digitális univerzum.
+  </div>
 </div>
 
-<div class="card" onclick="openNews('Internet királynő','Szirom Luca egyetlen pillantással több szívet lop, mint mások ezer poszttal.')">
-<div class="img">📱</div>
-<div class="content">
-<h3>Luca uralja az internetet</h3>
-<p>Like-ok robbanása világszerte.</p>
-<span class="tag">MEDIA</span>
-</div>
-</div>
-
-<div class="card" onclick="openNews('Titkos koncert','Luca titkos koncertje után a közönség szerint nem a zene, hanem Ő volt a legjobb szám.')">
-<div class="img">🎤</div>
-<div class="content">
-<h3>Titkos koncert</h3>
-<p>Mosoly turné elindult.</p>
-<span class="tag">MUSIC</span>
-</div>
+<div id="story" class="section">
+  <h2>A Mi Történetünk</h2>
+  <div class="grid">
+    <div class="card">Megismerés</div>
+    <div class="card">Első mosoly</div>
+    <div class="card">Első ölelés</div>
+    <div class="card">Most</div>
+  </div>
 </div>
 
-<div class="card" onclick="openNews('Világrekord','Szirom Luca tartja a rekordot: legaranyosabb pillantás 2.1 másodperc alatt.')">
-<div class="img">🌍</div>
-<div class="content">
-<h3>Világrekord</h3>
-<p>A tudomány sem érti.</p>
-<span class="tag">SCIENCE</span>
-</div>
-</div>
-
+<div id="countdown" class="section">
+  <h2>Visszaszámláló</h2>
+  <div class="card">
+    Következő évfordulóig:
+    <div id="timer" class="countdown"></div>
+  </div>
 </div>
 
-<div id="modal">
-<div class="modalBox">
-<span class="close" onclick="closeNews()">X</span>
-<h2 id="mTitle"></h2>
-<p id="mText"></p>
-<button class="loveBtn" onclick="love()">💖 Secret Button</button>
-</div>
+<div id="gallery" class="section">
+  <h2>Interaktív Ablakok</h2>
+  <div class="grid">
+    <div class="card"><button onclick="openModal('Te vagy a legszebb dolog az életemben.')">Üzenet 1</button></div>
+    <div class="card"><button onclick="openModal('Ez az oldal bizonyíték arra, mennyire fontos vagy.')">Üzenet 2</button></div>
+    <div class="card"><button onclick="openModal('Bárhol is vagy, mindig hozzád húz a szívem.')">Üzenet 3</button></div>
+    <div class="card"><button onclick="openModal('Ez csak a kezdet.')">Üzenet 4</button></div>
+  </div>
 </div>
 
-<footer>
-QR Secret Project by Lázár 😈
-</footer>
+<div id="secret" class="section">
+  <h2>Ne kattints</h2>
+  <div class="card" style="text-align:center">
+    <button onclick="openModal('Tudtam hogy ide is eljössz ❤️')">Titkos gomb</button>
+  </div>
+</div>
+
+<div id="modal" class="modal" onclick="closeModal()">
+  <div class="modal-content" id="modal-text"></div>
+</div>
 
 <script>
-function openNews(t,x){
-modal.style.display="flex";
-mTitle.innerText=t;
-mText.innerText=x;
+function showSection(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
 }
-function closeNews(){
-modal.style.display="none";
+
+function openModal(text){
+  document.getElementById('modal-text').innerText=text;
+  document.getElementById('modal').style.display='flex';
 }
-function love(){
-alert("Plot twist: te vagy Luca kedvenc híre 💕");
+function closeModal(){
+  document.getElementById('modal').style.display='none';
+}
+
+// Visszaszámláló
+const targetDate = new Date('2026-07-04T00:00:00');
+const timer = document.getElementById('timer');
+setInterval(()=>{
+  const now = new Date();
+  const diff = targetDate - now;
+  const d = Math.floor(diff/1000/60/60/24);
+  const h = Math.floor(diff/1000/60/60)%24;
+  const m = Math.floor(diff/1000/60)%60;
+  const s = Math.floor(diff/1000)%60;
+  timer.innerHTML = `${d} nap ${h} óra ${m} perc ${s} mp`;
+},1000);
+
+// Csillagos háttér
+const canvas=document.getElementById('stars');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+let stars=[];
+for(let i=0;i<300;i++){
+  stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.5,d:Math.random()*0.7});
+}
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle='white';
+  stars.forEach(s=>{
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fill();
+    s.y+=s.d;
+    if(s.y>canvas.height){s.y=0;s.x=Math.random()*canvas.width}
+  });
+}
+setInterval(draw,30);
+window.onresize=()=>{
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
 }
 </script>
 

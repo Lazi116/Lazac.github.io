@@ -153,7 +153,7 @@ h1{
 <p class="short">Ez a szeretet napról napra nő 🙂</p>
 <div class="card" onclick="toggle(this)">Első gondolat reggel...<div class="reveal">legtöbbször te vagy.</div></div>
 <div class="card" onclick="toggle(this)">Miért jó veled lenni?<div class="reveal">Mert nyugodt vagyok melletted.</div></div>
-<div class="card" onclick="toggle(this)">Kedvenc pillanat?<div class="reveal">Az, hogy együtt csinálunk akár semmit is.</div></div>
+<div class="card" onclick="toggle(this)">Kedvenc pillanat?<div class="reveal">Kedvenc??? Veled??? Az összes egyértelmű.</div></div>
 </div>
 </section>
 

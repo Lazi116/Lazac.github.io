@@ -1,135 +1,188 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Luca — Experience</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neked ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
 :root{
- --bg:#020617;--panel:#0b1220;--soft:#0f172a;--text:#e5e7eb;--accent:#f472b6;--accent2:#22d3ee;
+ --bg1:#1f1020;
+ --bg2:#3a1c3f;
+ --accent:#ff6fa5;
+ --accent2:#ffd1dc;
+ --text:#fff5f7;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Inter,system-ui;background:radial-gradient(circle at 30% 10%,#0b1020,var(--bg));color:var(--text);overflow-x:hidden}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+ font-family:Montserrat, sans-serif;
+ color:var(--text);
+ background:linear-gradient(135deg,var(--bg1),var(--bg2));
+ overflow-x:hidden;
+}
 
-/* progress bar */
-#progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%;z-index:3000}
+h1,h2{font-family:'Playfair Display',serif}
+.script{font-family:'Great Vibes',cursive}
 
-/* sidebar */
-.sidebar{position:fixed;left:0;top:0;width:240px;height:100vh;background:rgba(10,15,30,.6);backdrop-filter:blur(14px);padding:28px}
-.sidebar h1{font-family:'Playfair Display';font-size:1.6rem;margin-bottom:30px}
-.sidebar a{display:block;color:#cbd5e1;text-decoration:none;margin:14px 0;transition:.25s}
-.sidebar a:hover{color:var(--accent);transform:translateX(6px)}
+nav{
+ position:fixed;top:0;width:100%;
+ background:rgba(0,0,0,.25);
+ backdrop-filter:blur(10px);
+ display:flex;justify-content:center;gap:30px;
+ padding:18px;z-index:1000;
+}
+nav a{color:#fff;text-decoration:none;cursor:pointer;transition:.3s}
+nav a:hover{color:var(--accent)}
 
-main{margin-left:240px}
-.section{min-height:100vh;padding:70px 8%;display:none}
-.section.active{display:block;animation:fade .6s ease}
-@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1}}
+.section{
+ min-height:100vh;
+ padding:120px 10% 60px;
+ display:none;
+ animation:fade .7s ease;
+}
+.section.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(20px)}to{opacity:1}}
 
-h2{font-family:'Playfair Display';margin-bottom:16px}
-.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:28px;border-radius:18px;margin:18px 0;backdrop-filter:blur(10px)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.card{
+ background:rgba(255,255,255,.08);
+ border-radius:20px;
+ padding:30px;
+ margin:20px 0;
+ backdrop-filter:blur(12px);
+ box-shadow:0 10px 40px rgba(0,0,0,.3);
+}
 
-button{background:linear-gradient(90deg,var(--accent),var(--accent2));border:none;color:white;padding:10px 18px;border-radius:999px;cursor:pointer}
+button{
+ background:linear-gradient(90deg,var(--accent),#ff9ec4);
+ border:none;color:white;padding:10px 20px;
+ border-radius:30px;cursor:pointer;
+}
 
-/* letter style */
-.letter{background:#fdfaf6;color:#222;padding:40px;border-radius:6px;font-family:'Playfair Display';line-height:1.7;box-shadow:0 20px 60px rgba(0,0,0,.4)}
-.type{border-right:2px solid #222;white-space:pre-line;overflow:hidden}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+
+/* lebegő szívecskék */
+canvas{position:fixed;top:0;left:0;z-index:-1}
 
 /* modal */
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center}
-.modalBox{background:var(--panel);padding:40px;border-radius:16px;max-width:480px;text-align:center}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center}
+.modalBox{background:#2a132d;padding:40px;border-radius:16px;max-width:420px;text-align:center}
 
-/* command palette */
-#cmd{position:fixed;top:20%;left:50%;transform:translateX(-50%);background:var(--panel);padding:20px;border-radius:12px;width:420px;display:none}
-#cmd input{width:100%;padding:10px;background:#020617;border:1px solid #1f2937;color:white}
+.count{font-size:1.4rem;margin-top:10px}
 
-canvas{position:fixed;inset:0;z-index:-1}
+input,textarea{
+ width:100%;padding:10px;margin-top:10px;border-radius:10px;border:none;
+}
 </style>
 </head>
 <body>
-<div id="progress"></div>
-<canvas id="bg"></canvas>
+<canvas id="hearts"></canvas>
 
-<div class="sidebar">
-<h1>Luca</h1>
-<a onclick="go('home')">Home</a>
-<a onclick="go('letter')">The Letter</a>
-<a onclick="go('time')">Time</a>
-<a onclick="go('moments')">Moments</a>
-<a onclick="go('hidden')">Hidden</a>
-</div>
+<nav>
+<a onclick="go('home')">Kezdőlap</a>
+<a onclick="go('letter')">Levél</a>
+<a onclick="go('memories')">Emlékek</a>
+<a onclick="go('countdown')">Visszaszámláló</a>
+<a onclick="go('why')">Miért szeretlek</a>
+<a onclick="go('secret')">Titok</a>
+</nav>
 
-<main>
 <section id="home" class="section active">
-<h2>Welcome</h2>
-<div class="card">This is designed like a real product, but it only has one user.</div>
-<div class="card">Everything here is intentional.</div>
+<h1 class="script" style="font-size:3rem">Ez az oldal érted készült</h1>
+<div class="card">Nem azért, hogy "szép" legyen. Hanem hogy megmutassa, mennyire fontos vagy nekem.</div>
+<div class="card">Minden kis részlet azért van itt, mert te vagy az életem része.</div>
 </section>
 
 <section id="letter" class="section">
-<h2>A Letter For You</h2>
-<div class="letter"><div id="typed" class="type"></div></div>
+<h2>Amit talán szóban nehéz elmondani</h2>
+<div class="card" id="typed"></div>
 </section>
 
-<section id="time" class="section">
-<h2>Time Until Our Next Chapter</h2>
-<div class="card"><div id="timer"></div></div>
-</section>
-
-<section id="moments" class="section">
-<h2>Fragments</h2>
+<section id="memories" class="section">
+<h2>Kis pillanatok</h2>
 <div class="grid">
-<div class="card"><button onclick="openMsg('Some meetings change nothing. Some change everything.')">Open</button></div>
-<div class="card"><button onclick="openMsg('Time moves normally. Except when I am with you.')">Open</button></div>
-<div class="card"><button onclick="openMsg('This is not memory. This is ongoing.')">Open</button></div>
+<div class="card"><button onclick="msg('Veled a legegyszerűbb dolgok is különlegesek.')">Megnyit</button></div>
+<div class="card"><button onclick="msg('Amikor együtt vagyunk, minden kicsit könnyebb.')">Megnyit</button></div>
+<div class="card"><button onclick="msg('Nem kell nagy dolgoknak történniük, hogy boldog legyek.')">Megnyit</button></div>
 </div>
 </section>
 
-<section id="hidden" class="section">
-<h2>You Found This</h2>
-<div class="card">Not everything is meant to be obvious.</div>
+<section id="countdown" class="section">
+<h2>Következő évfordulónkig</h2>
+<div class="card"><div id="timer" class="count"></div></div>
 </section>
-</main>
+
+<section id="why" class="section">
+<h2>Miért szeretlek?</h2>
+<div class="card">
+<button onclick="generateReason()">Mutass egy okot</button>
+<p id="reason" style="margin-top:15px"></p>
+</div>
+</section>
+
+<section id="secret" class="section">
+<h2>Ha idáig eljutottál…</h2>
+<div class="card">Ez az oldal csak egy dologra akart emlékeztetni: fontos vagy nekem. Nagyon.</div>
+</section>
 
 <div class="modal" id="modal"><div class="modalBox" id="modalText"></div></div>
 
-<div id="cmd"><input placeholder="Type: home / letter / time ..." onkeydown="cmdNav(event)"></div>
-
 <script>
-/* navigation */
-function go(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+function go(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0)}
 
-/* typing letter */
-const text=`I don't know if websites are supposed to feel like this.\n\nBut this one exists because of you.\nNot to impress. Not to show.\nJust to hold something real in a digital space.`;
-let i=0;function type(){if(i<text.length){typed.innerHTML+=text.charAt(i);i++;setTimeout(type,28);}}type();
+/* gépelős levél (Valentin-napi hangulat, nem szó szerint) */
+const text=`Nem tudom, hogy lehet-e egy érzést igazán leírni.
 
-/* countdown */
-const target=new Date('2026-07-04');
+De azt tudom, hogy mióta ismerlek, minden nap egy kicsit más lett.
+Nem tökéletes — csak jobb. És nekem ez számít.
+
+Nem nagy szavak miatt vagy fontos.
+Hanem a mosolyod, a jelenléted, a közös pillanatok miatt.
+
+Ez az oldal is csak egy apró próbálkozás arra,
+hogy megmutassam: szeretlek.`;
+let i=0;
+function type(){if(i<text.length){document.getElementById('typed').innerHTML+=text.charAt(i);i++;setTimeout(type,25)}}
+type();
+
+/* visszaszámláló */
+const target=new Date('2026-07-04T00:00:00');
 setInterval(()=>{
 let d=target-new Date();
-let days=Math.floor(d/86400000);
-let h=Math.floor(d/3600000)%24;
-let m=Math.floor(d/60000)%60;
-let s=Math.floor(d/1000)%60;
-timer.innerHTML=`${days}d ${h}h ${m}m ${s}s`;
+let nap=Math.floor(d/86400000);
+let ora=Math.floor(d/3600000)%24;
+let perc=Math.floor(d/60000)%60;
+let mp=Math.floor(d/1000)%60;
+timer.innerHTML=`${nap} nap ${ora} óra ${perc} perc ${mp} mp`;
 },1000);
 
+/* random okok */
+const reasons=[
+"Mert veled önmagam lehetek.",
+"Mert megnevettetsz.",
+"Mert jó melletted lenni.",
+"Mert számítasz nekem.",
+"Mert együtt minden egyszerűbb."
+];
+function generateReason(){
+reason.innerText=reasons[Math.floor(Math.random()*reasons.length)];
+}
+
 /* modal */
-function openMsg(t){modal.style.display='flex';modalText.innerText=t}
+function msg(t){modal.style.display='flex';modalText.innerText=t}
 modal.onclick=()=>modal.style.display='none';
 
-/* command palette */
-document.addEventListener('keydown',e=>{if(e.ctrlKey&&e.key==='k'){e.preventDefault();cmd.style.display='block';cmd.querySelector('input').focus();}});
-function cmdNav(e){if(e.key==='Enter'){go(e.target.value.toLowerCase());cmd.style.display='none';}}
-
-/* scroll progress */
-window.onscroll=()=>{let h=document.documentElement.scrollHeight-window.innerHeight;progress.style.width=(window.scrollY/h)*100+'%'};
-
-/* animated background */
-const c=document.getElementById('bg');const x=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;
-let p=Array.from({length:120},()=>({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2,v:Math.random()*0.4}));
-(function a(){x.clearRect(0,0,c.width,c.height);x.fillStyle='white';p.forEach(o=>{x.beginPath();x.arc(o.x,o.y,o.r,0,6.28);x.fill();o.y+=o.v;if(o.y>c.height)o.y=0});requestAnimationFrame(a);})();
+/* lebegő szívek háttér */
+const c=document.getElementById('hearts');
+const x=c.getContext('2d');
+c.width=innerWidth;c.height=innerHeight;
+let h=[];
+for(let i=0;i<60;i++)h.push({x:Math.random()*c.width,y:Math.random()*c.height,s:Math.random()*2+1,v:Math.random()*0.5});
+(function draw(){
+x.clearRect(0,0,c.width,c.height);
+x.fillStyle='rgba(255,182,193,.7)';
+h.forEach(o=>{x.beginPath();x.arc(o.x,o.y,o.s,0,6.28);x.fill();o.y-=o.v;if(o.y<0)o.y=c.height});
+requestAnimationFrame(draw);
+})();
 </script>
 </body>
 </html>

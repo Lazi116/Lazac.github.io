@@ -87,9 +87,9 @@ input,textarea{
 </nav>
 
 <section id="home" class="section active">
-<h1 class="script" style="font-size:3rem">Ez az oldal érted készült</h1>
+<h1 class="script" style="font-size:3rem">Ez az oldal neked készült</h1>
 <div class="card">Nem azért, hogy "szép" legyen. Hanem hogy megmutassa, mennyire fontos vagy nekem.</div>
-<div class="card">Minden kis részlet azért van itt, mert te vagy az életem része.</div>
+<div class="card">Minden kis részlet azért van itt, mert te vagy életem legfontosabb része.</div>
 </section>
 
 <section id="letter" class="section">

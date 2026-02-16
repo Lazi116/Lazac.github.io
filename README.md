@@ -1,226 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luca — Digital Universe</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Luca — Experience</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
- --bg1:#020617;
- --bg2:#0f172a;
- --accent:#f472b6;
- --accent2:#22d3ee;
- --glass:rgba(255,255,255,0.06);
- --text:#e2e8f0;
+ --bg:#020617;--panel:#0b1220;--soft:#0f172a;--text:#e5e7eb;--accent:#f472b6;--accent2:#22d3ee;
 }
-*{margin:0;padding:0;box-sizing:border-box}
-body{
- font-family:'Montserrat',sans-serif;
- color:var(--text);
- background:radial-gradient(circle at 30% 20%,#111827,var(--bg1));
- overflow-x:hidden;
-}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui;background:radial-gradient(circle at 30% 10%,#0b1020,var(--bg));color:var(--text);overflow-x:hidden}
 
-/* Sidebar */
-.sidebar{
- position:fixed;
- left:0;top:0;
- height:100vh;width:220px;
- background:rgba(0,0,0,0.4);
- backdrop-filter:blur(12px);
- padding:30px 20px;
- z-index:1000;
-}
-.sidebar h2{font-family:'Playfair Display';margin-bottom:30px}
-.sidebar a{
- display:block;
- margin:15px 0;
- color:#cbd5e1;
- text-decoration:none;
- transition:.3s;
-}
-.sidebar a:hover{color:var(--accent);transform:translateX(8px)}
+/* progress bar */
+#progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%;z-index:3000}
 
-main{margin-left:220px}
+/* sidebar */
+.sidebar{position:fixed;left:0;top:0;width:240px;height:100vh;background:rgba(10,15,30,.6);backdrop-filter:blur(14px);padding:28px}
+.sidebar h1{font-family:'Playfair Display';font-size:1.6rem;margin-bottom:30px}
+.sidebar a{display:block;color:#cbd5e1;text-decoration:none;margin:14px 0;transition:.25s}
+.sidebar a:hover{color:var(--accent);transform:translateX(6px)}
 
-.section{
- min-height:100vh;
- padding:80px 8%;
- position:relative;
- display:none;
-}
-.section.active{display:block;animation:fade .9s ease}
+main{margin-left:240px}
+.section{min-height:100vh;padding:70px 8%;display:none}
+.section.active{display:block;animation:fade .6s ease}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1}}
 
-@keyframes fade{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+h2{font-family:'Playfair Display';margin-bottom:16px}
+.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:28px;border-radius:18px;margin:18px 0;backdrop-filter:blur(10px)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
 
-h1{font-family:'Playfair Display';font-size:3rem;margin-bottom:20px}
+button{background:linear-gradient(90deg,var(--accent),var(--accent2));border:none;color:white;padding:10px 18px;border-radius:999px;cursor:pointer}
 
-.card{
- background:var(--glass);
- border:1px solid rgba(255,255,255,0.1);
- border-radius:24px;
- padding:35px;
- margin:20px 0;
- backdrop-filter:blur(16px);
- transition:.4s;
-}
-.card:hover{transform:translateY(-8px) scale(1.01)}
-
-.grid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
- gap:20px;
-}
-
-button{
- background:linear-gradient(90deg,var(--accent),var(--accent2));
- border:none;padding:12px 22px;border-radius:40px;
- color:white;cursor:pointer;font-weight:600;
-}
-
-.countdown{font-size:1.4rem;margin-top:10px}
-
-/* floating particles */
-canvas{position:fixed;top:0;left:0;z-index:-1}
+/* letter style */
+.letter{background:#fdfaf6;color:#222;padding:40px;border-radius:6px;font-family:'Playfair Display';line-height:1.7;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.type{border-right:2px solid #222;white-space:pre-line;overflow:hidden}
 
 /* modal */
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:2000}
-.modal-box{background:#020617;padding:50px;border-radius:20px;max-width:500px;text-align:center}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center}
+.modalBox{background:var(--panel);padding:40px;border-radius:16px;max-width:480px;text-align:center}
 
-/* music toggle */
-.music{
- position:fixed;bottom:25px;right:25px;
- background:#111827;border-radius:50%;
- width:60px;height:60px;
- display:flex;align-items:center;justify-content:center;
- cursor:pointer;font-size:20px;
-}
+/* command palette */
+#cmd{position:fixed;top:20%;left:50%;transform:translateX(-50%);background:var(--panel);padding:20px;border-radius:12px;width:420px;display:none}
+#cmd input{width:100%;padding:10px;background:#020617;border:1px solid #1f2937;color:white}
+
+canvas{position:fixed;inset:0;z-index:-1}
 </style>
 </head>
 <body>
-
+<div id="progress"></div>
 <canvas id="bg"></canvas>
 
 <div class="sidebar">
- <h2>Luca</h2>
- <a onclick="go('home')">Home</a>
- <a onclick="go('story')">Story</a>
- <a onclick="go('timeline')">Timeline</a>
- <a onclick="go('countdown')">Countdown</a>
- <a onclick="go('memories')">Memories</a>
- <a onclick="go('secret')">Secret</a>
+<h1>Luca</h1>
+<a onclick="go('home')">Home</a>
+<a onclick="go('letter')">The Letter</a>
+<a onclick="go('time')">Time</a>
+<a onclick="go('moments')">Moments</a>
+<a onclick="go('hidden')">Hidden</a>
 </div>
 
 <main>
 <section id="home" class="section active">
-<h1>This is not a website.</h1>
-<div class="card">This is a digital space built for one person only.</div>
-<div class="card">Every animation, every pixel, every line exists because you exist.</div>
+<h2>Welcome</h2>
+<div class="card">This is designed like a real product, but it only has one user.</div>
+<div class="card">Everything here is intentional.</div>
 </section>
 
-<section id="story" class="section">
-<h1>Why You Matter</h1>
+<section id="letter" class="section">
+<h2>A Letter For You</h2>
+<div class="letter"><div id="typed" class="type"></div></div>
+</section>
+
+<section id="time" class="section">
+<h2>Time Until Our Next Chapter</h2>
+<div class="card"><div id="timer"></div></div>
+</section>
+
+<section id="moments" class="section">
+<h2>Fragments</h2>
 <div class="grid">
-<div class="card">You changed ordinary days into meaningful ones.</div>
-<div class="card">You made time feel faster and moments feel deeper.</div>
-<div class="card">This page is just a reflection of that impact.</div>
+<div class="card"><button onclick="openMsg('Some meetings change nothing. Some change everything.')">Open</button></div>
+<div class="card"><button onclick="openMsg('Time moves normally. Except when I am with you.')">Open</button></div>
+<div class="card"><button onclick="openMsg('This is not memory. This is ongoing.')">Open</button></div>
 </div>
 </section>
 
-<section id="timeline" class="section">
-<h1>Our Timeline</h1>
-<div class="card">The day everything started.</div>
-<div class="card">The first time I realized you were different.</div>
-<div class="card">All the small moments that became important.</div>
-<div class="card">Right now — still writing this story.</div>
-</section>
-
-<section id="countdown" class="section">
-<h1>Next Anniversary In</h1>
-<div id="timer" class="countdown"></div>
-</section>
-
-<section id="memories" class="section">
-<h1>Interactive Messages</h1>
-<div class="grid">
-<div class="card"><button onclick="msg('You are the calm in my chaos.')">Open</button></div>
-<div class="card"><button onclick="msg('Some people exist. You feel like destiny.')">Open</button></div>
-<div class="card"><button onclick="msg('If time had a favorite moment, it would be us.')">Open</button></div>
-<div class="card"><button onclick="msg('This is only version 1 of something infinite.')">Open</button></div>
-</div>
-</section>
-
-<section id="secret" class="section">
-<h1>You weren’t supposed to find this.</h1>
-<div class="card"><button onclick="msg('But I knew you would.')">Reveal</button></div>
+<section id="hidden" class="section">
+<h2>You Found This</h2>
+<div class="card">Not everything is meant to be obvious.</div>
 </section>
 </main>
 
-<div class="modal" id="modal" onclick="closeMsg()">
-<div class="modal-box" id="modalText"></div>
-</div>
+<div class="modal" id="modal"><div class="modalBox" id="modalText"></div></div>
 
-<div class="music" onclick="toggleMusic()">♫</div>
-<audio id="audio" loop>
-<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_115b9bceef.mp3" type="audio/mpeg">
-</audio>
+<div id="cmd"><input placeholder="Type: home / letter / time ..." onkeydown="cmdNav(event)"></div>
 
 <script>
-function go(id){
- document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
- document.getElementById(id).classList.add('active');
- window.scrollTo(0,0);
-}
+/* navigation */
+function go(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
 
-function msg(t){
- modal.style.display='flex';
- modalText.innerText=t;
-}
-function closeMsg(){modal.style.display='none'}
+/* typing letter */
+const text=`I don't know if websites are supposed to feel like this.\n\nBut this one exists because of you.\nNot to impress. Not to show.\nJust to hold something real in a digital space.`;
+let i=0;function type(){if(i<text.length){typed.innerHTML+=text.charAt(i);i++;setTimeout(type,28);}}type();
 
 /* countdown */
-const target=new Date('2026-07-04T00:00:00');
+const target=new Date('2026-07-04');
 setInterval(()=>{
- const now=new Date();
- const d=target-now;
- const days=Math.floor(d/1000/60/60/24);
- const h=Math.floor(d/1000/60/60)%24;
- const m=Math.floor(d/1000/60)%60;
- const s=Math.floor(d/1000)%60;
- timer.innerHTML=`${days}d ${h}h ${m}m ${s}s`;
+let d=target-new Date();
+let days=Math.floor(d/86400000);
+let h=Math.floor(d/3600000)%24;
+let m=Math.floor(d/60000)%60;
+let s=Math.floor(d/1000)%60;
+timer.innerHTML=`${days}d ${h}h ${m}m ${s}s`;
 },1000);
 
-/* music */
-let playing=false;
-function toggleMusic(){
- if(!playing){audio.play()}else{audio.pause()}
- playing=!playing;
-}
+/* modal */
+function openMsg(t){modal.style.display='flex';modalText.innerText=t}
+modal.onclick=()=>modal.style.display='none';
 
-/* animated particles */
-const c=document.getElementById('bg');
-const x=c.getContext('2d');
-c.width=innerWidth;c.height=innerHeight;
-let p=[];
-for(let i=0;i<160;i++){
- p.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2,v:Math.random()*0.6});
-}
-function anim(){
- x.clearRect(0,0,c.width,c.height);
- x.fillStyle='white';
- p.forEach(o=>{
-  x.beginPath();
-  x.arc(o.x,o.y,o.r,0,Math.PI*2);
-  x.fill();
-  o.y+=o.v;
-  if(o.y>c.height)o.y=0;
- });
- requestAnimationFrame(anim);
-}
-anim();
+/* command palette */
+document.addEventListener('keydown',e=>{if(e.ctrlKey&&e.key==='k'){e.preventDefault();cmd.style.display='block';cmd.querySelector('input').focus();}});
+function cmdNav(e){if(e.key==='Enter'){go(e.target.value.toLowerCase());cmd.style.display='none';}}
 
-onresize=()=>{c.width=innerWidth;c.height=innerHeight}
+/* scroll progress */
+window.onscroll=()=>{let h=document.documentElement.scrollHeight-window.innerHeight;progress.style.width=(window.scrollY/h)*100+'%'};
+
+/* animated background */
+const c=document.getElementById('bg');const x=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;
+let p=Array.from({length:120},()=>({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2,v:Math.random()*0.4}));
+(function a(){x.clearRect(0,0,c.width,c.height);x.fillStyle='white';p.forEach(o=>{x.beginPath();x.arc(o.x,o.y,o.r,0,6.28);x.fill();o.y+=o.v;if(o.y>c.height)o.y=0});requestAnimationFrame(a);})();
 </script>
 </body>
 </html>

@@ -3,133 +3,226 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Neked ❤️</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
+<title>Neked 💗</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg1:#1f1020;--bg2:#3a1c3f;--accent:#ff6fa5;--accent2:#ffd1dc;--text:#fff5f7}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Montserrat,sans-serif;color:var(--text);background:linear-gradient(135deg,var(--bg1),var(--bg2));overflow-x:hidden}
-h1,h2{font-family:'Playfair Display',serif}
-.script{font-family:'Great Vibes',cursive}
-nav{position:fixed;top:0;width:100%;background:rgba(0,0,0,.25);backdrop-filter:blur(10px);display:flex;justify-content:center;gap:30px;padding:18px;z-index:1000}
-nav a{color:#fff;text-decoration:none;cursor:pointer;transition:.3s}
-nav a:hover{color:var(--accent)}
-.section{min-height:100vh;padding:120px 10% 60px;display:none;animation:fade .7s ease}
-.section.active{display:block}
-@keyframes fade{from{opacity:0;transform:translateY(20px)}to{opacity:1}}
-.card{background:rgba(255,255,255,.08);border-radius:20px;padding:30px;margin:20px 0;backdrop-filter:blur(12px);box-shadow:0 10px 40px rgba(0,0,0,.3)}
-button{background:linear-gradient(90deg,var(--accent),#ff9ec4);border:none;color:white;padding:10px 20px;border-radius:30px;cursor:pointer}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-canvas{position:fixed;top:0;left:0;z-index:-1}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center}
-.modalBox{background:#2a132d;padding:40px;border-radius:16px;max-width:420px;text-align:center}
-.count{font-size:1.4rem;margin-top:10px}
+:root{
+  --bg1:#fff0f5;
+  --bg2:#ffe4ec;
+  --accent:#ff6b9a;
+  --text:#4a2c35;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  color:var(--text);
+  background:linear-gradient(135deg,var(--bg1),var(--bg2));
+  overflow-x:hidden;
+}
+nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  background:rgba(255,255,255,.7);
+  backdrop-filter:blur(10px);
+  padding:10px;
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  z-index:10;
+}
+nav button{
+  border:none;
+  background:none;
+  font-size:15px;
+  color:var(--text);
+  cursor:pointer;
+  padding:6px 10px;
+  border-radius:8px;
+}
+nav button:hover{background:#fff}
+section{
+  min-height:100vh;
+  padding:100px 20px 60px;
+  display:none;
+  justify-content:center;
+}
+section.active{display:flex}
+.container{
+  max-width:620px; /* könnyű olvashatóság */
+  width:100%;
+}
+h1{
+  font-family:'Great Vibes',cursive;
+  font-size:52px;
+  text-align:center;
+  margin-bottom:10px;
+}
+.short{
+  text-align:center;
+  font-size:18px;
+  margin:14px 0;
+  line-height:1.7;
+}
+.card{
+  background:white;
+  padding:18px;
+  border-radius:18px;
+  margin:12px 0;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  cursor:pointer;
+  transition:.3s;
+}
+.card:hover{transform:scale(1.03)}
+.reveal{display:none;margin-top:8px;color:#7a4b57}
+.button{
+  display:block;
+  margin:20px auto;
+  padding:12px 20px;
+  border:none;
+  border-radius:999px;
+  background:var(--accent);
+  color:white;
+  font-size:15px;
+  cursor:pointer;
+}
+.counter{
+  text-align:center;
+  font-size:20px;
+  margin-top:20px;
+}
+.meter{
+  height:10px;
+  background:#ffd3e0;
+  border-radius:10px;
+  overflow:hidden;
+  margin:20px 0;
+}
+.meter span{
+  display:block;
+  height:100%;
+  width:0%;
+  background:var(--accent);
+  transition:1s;
+}
+.quote{
+  text-align:center;
+  font-size:17px;
+  margin:25px 0;
+  min-height:40px;
+}
+.fade{animation:fade .6s}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
 </style>
 </head>
 <body>
-<canvas id="hearts"></canvas>
 
 <nav>
-<a onclick="go('home')">Kezdőlap</a>
-<a onclick="go('letter')">Levél</a>
-<a onclick="go('memories')">Emlékek</a>
-<a onclick="go('countdown')">Idő</a>
-<a onclick="go('why')">Miért szeretlek</a>
-<a onclick="go('secret')">Titok</a>
+<button onclick="show('home')">Kezdőlap</button>
+<button onclick="show('letter')">Levél</button>
+<button onclick="show('time')">Mióta együtt</button>
+<button onclick="show('why')">Miért szeretlek</button>
 </nav>
 
-<section id="home" class="section active">
-<h1 class="script" style="font-size:3rem">Ez az oldal érted készült</h1>
-<div class="card">Nem azért, hogy szép legyen. Hanem hogy lásd, mennyire fontos vagy nekem.</div>
-<div class="card">Minden kis részlet azt jelenti: szeretlek.</div>
-</section>
+<section id="home" class="active">
+<div class="container">
+<h1>Szia 💗</h1>
+<p class="short">Ezt az oldalt nem csak csináltam.</p>
+<p class="short">Hanem időt tettem bele.</p>
+<p class="short">Mert te fontos vagy nekem.</p>
 
-<section id="letter" class="section">
-<h2>Amit talán szóban nehéz elmondani</h2>
-<div class="card" id="typed"></div>
-</section>
+<div class="meter"><span id="loveMeter"></span></div>
+<p class="short">Ez minden nappal nő 🙂</p>
 
-<section id="memories" class="section">
-<h2>Kis pillanatok</h2>
-<div class="grid">
-<div class="card"><button onclick="msg('Veled a legegyszerűbb dolgok is különlegesek.')">Megnyit</button></div>
-<div class="card"><button onclick="msg('Amikor együtt vagyunk, minden kicsit könnyebb.')">Megnyit</button></div>
-<div class="card"><button onclick="msg('Nem kell nagy dolgoknak történniük, hogy boldog legyek.')">Megnyit</button></div>
+<div class="card" onclick="toggle(this)">
+Első gondolat reggel...
+<div class="reveal">legtöbbször te vagy.</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+Miért jó veled lenni?
+<div class="reveal">Mert nyugodt vagyok melletted.</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+Tudod mi a kedvenc részem?
+<div class="reveal">Az, hogy együtt csinálunk akár semmit is.</div>
+</div>
+
 </div>
 </section>
 
-<section id="countdown" class="section">
-<h2>Mióta vagyunk együtt ❤️</h2>
-<div class="card"><div id="sinceTimer" class="count"></div></div>
-
-<h2 style="margin-top:40px">Következő évfordulónkig</h2>
-<div class="card"><div id="untilTimer" class="count"></div></div>
-</section>
-
-<section id="why" class="section">
-<h2>Miért szeretlek?</h2>
-<div class="card">
-<button onclick="generateReason()">Mutass egy okot</button>
-<p id="reason" style="margin-top:15px"></p>
+<section id="letter">
+<div class="container">
+<h1>Egy kis levél</h1>
+<p class="short fade">Nem akarok nagy szavakat.</p>
+<p class="short fade">Csak azt, hogy tudd...</p>
+<p class="short fade">nagyon örülök, hogy vagy nekem.</p>
+<p class="short fade">És minden nap, amióta együtt vagyunk, számít.</p>
+<p class="short fade">Nem tökéletes.</p>
+<p class="short fade">De igazi.</p>
 </div>
 </section>
 
-<section id="secret" class="section">
-<h2>Ha idáig eljutottál…</h2>
-<div class="card">Ez az egész csak egy dolog miatt készült: mert nagyon szeretlek.</div>
+<section id="time">
+<div class="container">
+<h1>Mióta együtt</h1>
+<div class="counter" id="together"></div>
+<p class="short">És ez csak megy tovább…</p>
+</div>
 </section>
 
-<div class="modal" id="modal"><div class="modalBox" id="modalText"></div></div>
+<section id="why">
+<div class="container">
+<h1>Random ok 😄</h1>
+<div class="quote" id="quote"></div>
+<button class="button" onclick="newQuote()">Új ok</button>
+</div>
+</section>
 
 <script>
-function go(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0)}
+function show(id){
+ document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+}
 
-/* kapcsolat kezdete */
-const startDate=new Date('2025-07-04T00:00:00');
-const nextAnniversary=new Date('2026-07-04T00:00:00');
+function toggle(el){
+ const r=el.querySelector('.reveal');
+ r.style.display=r.style.display==='block'?'none':'block';
+}
 
-setInterval(()=>{
-const now=new Date();
+const start=new Date('2025-07-04T00:00:00');
+function updateTime(){
+ const now=new Date();
+ const diff=now-start;
+ const d=Math.floor(diff/86400000);
+ const h=Math.floor(diff/3600000)%24;
+ const m=Math.floor(diff/60000)%60;
+ const s=Math.floor(diff/1000)%60;
+ document.getElementById('together').innerText=
+ `${d} nap ${h} óra ${m} perc ${s} mp`;
+}
+setInterval(updateTime,1000);
+updateTime();
 
-/* mennyi ideje vagytok együtt */
-let diff=now-startDate;
-let days=Math.floor(diff/86400000);
-let hours=Math.floor(diff/3600000)%24;
-let mins=Math.floor(diff/60000)%60;
-let secs=Math.floor(diff/1000)%60;
-sinceTimer.innerHTML=`${days} napja együtt — ${hours} óra ${mins} perc ${secs} mp`;
+const quotes=[
+"Mert jó veled beszélgetni.",
+"Mert megnevettetsz.",
+"Mert hiányzol, ha nem vagy ott.",
+"Mert melletted könnyebb minden.",
+"Mert te te vagy."
+];
+function newQuote(){
+ document.getElementById('quote').innerText=
+ quotes[Math.floor(Math.random()*quotes.length)];
+}
+newQuote();
 
-/* visszaszámolás évfordulóig */
-let left=nextAnniversary-now;
-let d=Math.floor(left/86400000);
-let h=Math.floor(left/3600000)%24;
-let m=Math.floor(left/60000)%60;
-let s=Math.floor(left/1000)%60;
-untilTimer.innerHTML=`${d} nap ${h} óra ${m} perc ${s} mp`;
-
-},1000);
-
-/* gépelős levél */
-const text=`Mióta együtt vagyunk, az idő furcsán működik.
-Egyszer gyorsabb, mert jó veled.
-Máskor meg szeretném, ha megállna.
-
-Ez az oldal is csak egy kis bizonyíték arra,
-hogy mennyire fontos vagy nekem.`;
-let i=0;function type(){if(i<text.length){typed.innerHTML+=text.charAt(i);i++;setTimeout(type,25)}}type();
-
-/* okok */
-const reasons=["Mert boldogabb vagyok veled.","Mert számítasz nekem.","Mert jó melletted lenni.","Mert te te vagy.","Mert együtt minden más."];
-function generateReason(){reason.innerText=reasons[Math.floor(Math.random()*reasons.length)]}
-
-/* modal */
-function msg(t){modal.style.display='flex';modalText.innerText=t}
-modal.onclick=()=>modal.style.display='none';
-
-/* lebegő szívek */
-const c=document.getElementById('hearts');const x=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;
-let h=[];for(let i=0;i<60;i++)h.push({x:Math.random()*c.width,y:Math.random()*c.height,s:Math.random()*2+1,v:Math.random()*0.5});
-(function draw(){x.clearRect(0,0,c.width,c.height);x.fillStyle='rgba(255,182,193,.7)';h.forEach(o=>{x.beginPath();x.arc(o.x,o.y,o.s,0,6.28);x.fill();o.y-=o.v;if(o.y<0)o.y=c.height});requestAnimationFrame(draw);})();
+// kis 'dopamin' animáció
+setTimeout(()=>{
+ document.getElementById('loveMeter').style.width='78%';
+},500);
 </script>
+
 </body>
 </html>

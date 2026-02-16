@@ -12,6 +12,12 @@
   --accent:#ff6b9a;
   --text:#4a2c35;
 }
+body.dark{
+  --bg1:#1f1020;
+  --bg2:#3a1c3f;
+  --accent:#ff6fa5;
+  --text:#fff5f7;
+}
 *{box-sizing:border-box}
 body{
   margin:0;
@@ -19,10 +25,10 @@ body{
   color:var(--text);
   background:linear-gradient(135deg,var(--bg1),var(--bg2));
   overflow-x:hidden;
+  transition:background 0.5s,color 0.5s;
 }
 nav{
-  position:fixed;
-  top:0;left:0;right:0;
+  position:fixed;top:0;left:0;right:0;
   background:rgba(255,255,255,.7);
   backdrop-filter:blur(10px);
   padding:10px;
@@ -49,7 +55,7 @@ section{
 }
 section.active{display:flex}
 .container{
-  max-width:620px; /* könnyű olvashatóság */
+  max-width:620px;
   width:100%;
 }
 h1{
@@ -113,6 +119,20 @@ h1{
 }
 .fade{animation:fade .6s}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+#darkModeToggle{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:var(--accent);
+  border:none;
+  border-radius:50%;
+  width:50px;
+  height:50px;
+  font-size:24px;
+  color:white;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(0,0,0,.3);
+}
 </style>
 </head>
 <body>
@@ -127,40 +147,24 @@ h1{
 <section id="home" class="active">
 <div class="container">
 <h1>Szia 💗</h1>
-<p class="short">Ezt az oldalt nem csak csináltam.</p>
-<p class="short">Hanem időt tettem bele.</p>
-<p class="short">Mert te fontos vagy nekem.</p>
-
+<p class="short">Ez az oldal rólad szól.</p>
+<p class="short">Minden apró részletet azért tettem ide, mert szeretlek.</p>
 <div class="meter"><span id="loveMeter"></span></div>
-<p class="short">Ez minden nappal nő 🙂</p>
-
-<div class="card" onclick="toggle(this)">
-Első gondolat reggel...
-<div class="reveal">legtöbbször te vagy.</div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-Miért jó veled lenni?
-<div class="reveal">Mert nyugodt vagyok melletted.</div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-Tudod mi a kedvenc részem?
-<div class="reveal">Az, hogy együtt csinálunk akár semmit is.</div>
-</div>
-
+<p class="short">Ez a szeretet napról napra nő 🙂</p>
+<div class="card" onclick="toggle(this)">Első gondolat reggel...<div class="reveal">legtöbbször te vagy.</div></div>
+<div class="card" onclick="toggle(this)">Miért jó veled lenni?<div class="reveal">Mert nyugodt vagyok melletted.</div></div>
+<div class="card" onclick="toggle(this)">Kedvenc pillanat?<div class="reveal">Az, hogy együtt csinálunk akár semmit is.</div></div>
 </div>
 </section>
 
 <section id="letter">
 <div class="container">
 <h1>Egy kis levél</h1>
-<p class="short fade">Nem akarok nagy szavakat.</p>
-<p class="short fade">Csak azt, hogy tudd...</p>
+<p class="short fade">Nem nagy szavak.</p>
+<p class="short fade">Csak hogy tudd...</p>
 <p class="short fade">nagyon örülök, hogy vagy nekem.</p>
-<p class="short fade">És minden nap, amióta együtt vagyunk, számít.</p>
-<p class="short fade">Nem tökéletes.</p>
-<p class="short fade">De igazi.</p>
+<p class="short fade">Minden nap, amióta együtt vagyunk, számít.</p>
+<p class="short fade">Nem tökéletes, de igazi.</p>
 </div>
 </section>
 
@@ -174,54 +178,32 @@ Tudod mi a kedvenc részem?
 
 <section id="why">
 <div class="container">
-<h1>Random ok 😄</h1>
+<h1>Miért szeretlek?</h1>
 <div class="quote" id="quote"></div>
 <button class="button" onclick="newQuote()">Új ok</button>
 </div>
 </section>
 
+<button id="darkModeToggle" onclick="toggleDark()">🌓</button>
+
 <script>
-function show(id){
- document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
- document.getElementById(id).classList.add('active');
-}
-
-function toggle(el){
- const r=el.querySelector('.reveal');
- r.style.display=r.style.display==='block'?'none':'block';
-}
-
+function show(id){document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+function toggle(el){const r=el.querySelector('.reveal');r.style.display=r.style.display==='block'?'none':'block';}
 const start=new Date('2025-07-04T00:00:00');
-function updateTime(){
- const now=new Date();
- const diff=now-start;
- const d=Math.floor(diff/86400000);
- const h=Math.floor(diff/3600000)%24;
- const m=Math.floor(diff/60000)%60;
- const s=Math.floor(diff/1000)%60;
- document.getElementById('together').innerText=
- `${d} nap ${h} óra ${m} perc ${s} mp`;
-}
-setInterval(updateTime,1000);
-updateTime();
+function updateTime(){const now=new Date();const diff=now-start;const d=Math.floor(diff/86400000);const h=Math.floor(diff/3600000)%24;const m=Math.floor(diff/60000)%60;const s=Math.floor(diff/1000)%60;document.getElementById('together').innerText=`${d} nap ${h} óra ${m} perc ${s} mp`;}
+setInterval(updateTime,1000);updateTime();
 
+// Miért szeretlek - sok ok
 const quotes=[
-"Mert jó veled beszélgetni.",
-"Mert megnevettetsz.",
-"Mert hiányzol, ha nem vagy ott.",
-"Mert melletted könnyebb minden.",
-"Mert te te vagy."
-];
-function newQuote(){
- document.getElementById('quote').innerText=
- quotes[Math.floor(Math.random()*quotes.length)];
-}
+"Mert boldogabb vagyok veled.","Mert megnevettetsz.","Mert hiányzol, ha nem vagy ott.","Mert melletted minden könnyebb.","Mert te te vagy.","Mert mindig figyelsz rám.","Mert veled minden egyszerűbb.","Mert a mosolyod ragyogtat.","Mert inspirálsz.","Mert a hangod megnyugtat.","Mert szeretem, ahogy gondolkodsz.","Mert minden nap jobbá teszed az életem.","Mert tudod, mikor kell hallgatni.","Mert szeretsz apró dolgokat csinálni.","Mert veled minden pillanat különleges." ];
+function newQuote(){document.getElementById('quote').innerText=quotes[Math.floor(Math.random()*quotes.length)];}
 newQuote();
 
-// kis 'dopamin' animáció
-setTimeout(()=>{
- document.getElementById('loveMeter').style.width='78%';
-},500);
+// dopaminos csík
+setTimeout(()=>{document.getElementById('loveMeter').style.width='78%';},500);
+
+// sötét/világos mód
+function toggleDark(){document.body.classList.toggle('dark');}
 </script>
 
 </body>
